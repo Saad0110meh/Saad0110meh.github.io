@@ -36,6 +36,8 @@ let unlockedAchievements = JSON.parse(localStorage.getItem('sleepyhead_achieveme
 // 2. CANVAS & ASSET SETUP
 // ==========================================
 const canvas = document.getElementById('game-canvas');
+canvas.width = 512;
+canvas.height = 384;
 const ctx = canvas.getContext('2d');
 
 // Function to handle full-screen resize
@@ -59,14 +61,14 @@ playerSprite.src = 'assets/16x16 Run-Sheet.png';
 const SPRITE_WIDTH = 16;     // 16px frame width
 const SPRITE_HEIGHT = 16;    // 16px frame height
 const TOTAL_COLUMNS = 6;     // 6 animation frames per row
-const SCALE = 4;             // Scaled size: 32x32px on canvas
+const SCALE = 2;             // Scaled size: 32x32px on canvas
 
 const player = {
-  x: canvas.width / 2 - (SPRITE_WIDTH * SCALE) / 2,
-  y: canvas.height / 2 - (SPRITE_HEIGHT * SCALE) / 2,
+  x: 250,
+  y: 220,
   speed: 2,
   frameX: 0,
-  frameY: 0,      // Row 0: Down, Row 2: Side, Row 4: Up
+  frameY: 0,
   facingRight: false,
   isMoving: false
 };
@@ -121,12 +123,12 @@ let isModalOpen = false;
 
 // Outer playable floor bounds to keep player inside the wooden floor
 function isWalkable(nextX, nextY) {
-  const pWidth = SPRITE_WIDTH * SCALE;
-  const pHeight = SPRITE_HEIGHT * SCALE;
+  const pWidth = SPRITE_WIDTH * SCALE;   // 32px
+  const pHeight = SPRITE_HEIGHT * SCALE; // 32px
 
-  // Keep player inside screen margins
-  if (nextX < 0 || nextX + pWidth > canvas.width) return false;
-  if (nextY < 0 || nextY + pHeight > canvas.height) return false;
+  // Wooden floor bounds inside the 512x384 image
+  if (nextX < 20 || nextX + pWidth > 490) return false;
+  if (nextY < 40 || nextY + pHeight > 340) return false;
 
   return true;
 }
