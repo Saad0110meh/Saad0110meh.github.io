@@ -15,16 +15,13 @@
 
 * { box-sizing: border-box; }
 
-html, body {
+body, html {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  background: #000;
-  color: var(--ps2-silver);
-  font-family: var(--font-body);
   overflow: hidden;
-  user-select: none;
+  background-color: #181825;
 }
 
 .hidden { display: none !important; }
@@ -107,22 +104,19 @@ html, body {
    LAYER 3 — GAME CANVAS
 ============================================================= */
 #game-wrap {
-  background: #1a1410; /* warm wood-floor fallback behind canvas */
-  position: fixed;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 #game-canvas {
-  /* Internal resolution is 512x384 (set in HTML attributes).
-     We scale it up with CSS and disable smoothing so custom
-     pixel-art spritesheets stay crisp at any screen size. */
-  width: min(96vw, 1024px);
-  height: auto;
-  aspect-ratio: 512 / 384;
+  width: 100%;
+  height: 100%;
+  display: block;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
-  border: 4px solid var(--ps2-cyan-dim);
-  box-shadow: 0 0 24px rgba(111, 232, 255, 0.25);
-  background: #2b2320;
 }
 
 .interact-prompt {

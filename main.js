@@ -38,6 +38,16 @@ let unlockedAchievements = JSON.parse(localStorage.getItem('sleepyhead_achieveme
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 
+// Function to handle full-screen resize
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+// Initial size and event listener for window resizing
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
 // Load Room Background Image
 const roomBg = new Image();
 roomBg.src = 'assets/room-bg.png';
