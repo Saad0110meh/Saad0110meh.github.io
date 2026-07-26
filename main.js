@@ -59,7 +59,7 @@ playerSprite.src = 'assets/16x16 Run-Sheet.png';
 const SPRITE_WIDTH = 16;     // 16px frame width
 const SPRITE_HEIGHT = 16;    // 16px frame height
 const TOTAL_COLUMNS = 6;     // 6 animation frames per row
-const SCALE = 2;             // Scaled size: 32x32px on canvas
+const SCALE = 4;             // Scaled size: 32x32px on canvas
 
 const player = {
   x: canvas.width / 2 - (SPRITE_WIDTH * SCALE) / 2,
@@ -124,9 +124,9 @@ function isWalkable(nextX, nextY) {
   const pWidth = SPRITE_WIDTH * SCALE;
   const pHeight = SPRITE_HEIGHT * SCALE;
 
-  // Outer bounds check (keeps character on playable floor tiles)
-  if (nextX < 100 || nextX + pWidth > 440) return false;
-  if (nextY < 70 || nextY + pHeight > 300) return false;
+  // Keep player inside screen margins
+  if (nextX < 0 || nextX + pWidth > canvas.width) return false;
+  if (nextY < 0 || nextY + pHeight > canvas.height) return false;
 
   return true;
 }
@@ -244,7 +244,7 @@ function checkProximity() {
 function render() {
   // Clear Canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+  
   // 1. Draw 512x384 Tavern Background
   if (roomBg.complete && roomBg.naturalWidth !== 0) {
     ctx.drawImage(roomBg, 0, 0, canvas.width, canvas.height);
